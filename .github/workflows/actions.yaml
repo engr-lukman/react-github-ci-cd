@@ -1,4 +1,4 @@
-name: ReactSimplePipeline
+name: React Simple CI/CD Pipeline
 
 on:
   push:
@@ -8,9 +8,10 @@ jobs:
   web-deploy:
     name: Deploy
     runs-on: ubuntu-latest
+
     steps:
       - name: Get latest code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node.js 16
         uses: actions/setup-node@v2
@@ -26,7 +27,7 @@ jobs:
         run: find build/ -print
 
       - name: Sync files
-        uses: SamKirkland/FTP-Deploy-Action@4.3.3
+        uses: SamKirkland/FTP-Deploy-Action@3.1.2
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
